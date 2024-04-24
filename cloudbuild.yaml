@@ -7,11 +7,9 @@ steps:
   args: ['yarn', 'playwright', 'install', 'chrome']
 
 - name: 'bash'
-  args:
-  - '-c'  # Execute a shell command
-  - 'command'
-  - '-V'
-  - 'google-chrome'
+  script: |
+      #!/usr/bin/env bash
+      command -V google-chrome
 
 # - name: 'mcr.microsoft.com/playwright:v1.43.0-jammy'
 #   args: ['yarn', 'test']

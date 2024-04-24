@@ -1,0 +1,13 @@
+# This line specifies the official Playwright Docker image
+steps:
+- name: 'mcr.microsoft.com/playwright:v1.43.0-jammy'
+  args: ['yarn', 'install', '--frozen-lockfile']
+
+- name: 'mcr.microsoft.com/playwright:v1.43.0-jammy'
+  args: ['npx', 'playwright', 'install', 'chrome']
+
+- name: 'mcr.microsoft.com/playwright:v1.43.0-jammy'
+  args: ['yarn', 'test']
+
+- name: 'gcr.io/cloud-builders/gsutil'  # (Optional)
+  args: ['cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/test_reports/']

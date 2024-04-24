@@ -10,4 +10,19 @@ steps:
   args: ['yarn', 'test']
 
 - name: 'gcr.io/cloud-builders/gsutil'  # (Optional)
-  args: ['cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/test_reports/']
+  args: ['cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/$BUILD_ID/']
+
+# Get the public URL for index.html (assuming it's in reports/)
+- name: 'gcr.io/cloud-builders/gsutil'
+  args:
+  - 'stat'  # Get object metadata
+  - '-H'  # Include headers in output
+  - 'gs://vierageorge-pw-poc/$BUILD_ID/playwright-report/index.html'
+
+# # Parse the output to extract the public URL
+# - name: 'bash'
+#   args:
+#   - '-c'  # Execute a shell command
+#   - |  # Multi-line command
+#     PUBLIC_URL=$(gsutil stat -H 'gs://your-bucket-name/test_reports/builds/$BUILD_ID/index.html' | grep -i 'Access-Control-Allow-Origin' | awk '{print $NF}')
+#     echo "Public URL for index.html: $PUBLIC_URL"

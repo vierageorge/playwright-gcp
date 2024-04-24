@@ -17,6 +17,8 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Install browser
+        run: npx playwright install chrome
       - name: Run your tests
         run: yarn test
         env:

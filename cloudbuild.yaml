@@ -10,7 +10,7 @@ steps:
   args: ['yarn', 'test']
 
 - name: 'gcr.io/cloud-builders/gsutil'  # (Optional)
-  args: ['cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/$BUILD_ID/']
+  args: ['-m', 'cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/$BUILD_ID/']
 
 # Parse the output to extract the public URL
 - name: 'bash'

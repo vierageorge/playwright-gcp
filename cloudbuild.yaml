@@ -9,7 +9,9 @@ steps:
 - name: 'bash'
   args:
   - '-c'  # Execute a shell command
-  - 'which google-chrome'
+  - 'command'
+  - '-V'
+  - 'google-chrome'
 
 # - name: 'mcr.microsoft.com/playwright:v1.43.0-jammy'
 #   args: ['yarn', 'test']

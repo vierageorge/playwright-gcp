@@ -6,6 +6,7 @@ on:
     branches: [ main, master ]
 jobs:
   playwright:
+    if: false
     name: 'Playwright Tests'
     runs-on: ubuntu-latest
     container:

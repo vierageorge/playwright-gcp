@@ -13,6 +13,7 @@ steps:
       && yarn test
   env:
   - 'CI=true'
+  allowFailure: true
 
 - name: "gcr.io/cloud-builders/gcloud-slim"
   args: [

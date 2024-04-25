@@ -11,7 +11,7 @@ const TODO_ITEMS = [
 ];
 
 test.describe('New Todo', () => {
-  test('should allow me to add todo items', async ({ page }) => {
+  test.only('should allow me to add todo items', async ({ page }) => {
     // create a new todo locator
     console.log('## CI ## ', process.env.CI ?? 'not_present');
     const newTodo = page.getByPlaceholder('What needs to be done?');
@@ -21,9 +21,7 @@ test.describe('New Todo', () => {
     await newTodo.press('Enter');
 
     // Make sure the list only has one todo item.
-    await expect(page.getByTestId('todo-title')).toHaveText([
-      TODO_ITEMS[0]
-    ]);
+    await expect(page.getByTestId('todo-title')).toHaveText([TODO_ITEMS[0]]);
 
     // Create 2nd todo.
     await newTodo.fill(TODO_ITEMS[1]);
@@ -32,7 +30,7 @@ test.describe('New Todo', () => {
     // Make sure the list now has two todo items.
     await expect(page.getByTestId('todo-title')).toHaveText([
       TODO_ITEMS[0],
-      TODO_ITEMS[1]
+      TODO_ITEMS[1],
     ]);
 
     await checkNumberOfTodosInLocalStorage(page, 2);

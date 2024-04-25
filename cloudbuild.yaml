@@ -17,6 +17,7 @@ steps:
   args: ['yarn', 'test']
   env:
   - 'CI=true'
+  - 'DEBUG=pw:browser'
 
 # - name: 'gcr.io/cloud-builders/gsutil'  # (Optional)
 #   args: ['-m', 'cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/$BUILD_ID/']

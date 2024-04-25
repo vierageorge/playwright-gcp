@@ -11,8 +11,10 @@ steps:
 #       #!/usr/bin/env bash
 #       command -V google-chrome
 
-- name: 'mcr.microsoft.com/playwright:v1.43.0-jammy'
+- name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
   args: ['yarn', 'test']
+  env:
+  - 'CI=true'
 
 # - name: 'gcr.io/cloud-builders/gsutil'  # (Optional)
 #   args: ['-m', 'cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/$BUILD_ID/']

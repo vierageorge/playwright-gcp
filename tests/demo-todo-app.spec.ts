@@ -15,8 +15,8 @@ test.describe('New Todo', () => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
-    // Create 1st todo.
-    await newTodo.fill(TODO_ITEMS[0]);
+    // Create 1st todo, setting it to fail.
+    await newTodo.fill('Something else');
     await newTodo.press('Enter');
 
     // Make sure the list only has one todo item.

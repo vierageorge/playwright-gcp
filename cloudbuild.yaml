@@ -2,7 +2,6 @@
 steps:
 - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
   args: ['yarn', '--frozen-lockfile']
-
 - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
   entrypoint: 'bash'
   args:
@@ -12,6 +11,11 @@ steps:
       && yarn test
   env:
   - 'CI=true'
+
+artifacts:
+  objects:
+    location: 'gs://vierageorge-pw-poc/$BUILD_ID'
+    paths: ['playwright-report']
 
 # - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
 #   args: ['yarn', 'test']

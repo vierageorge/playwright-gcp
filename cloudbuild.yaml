@@ -1,7 +1,9 @@
 # This line specifies the official Playwright Docker image
 steps:
+
 - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
   args: ['yarn', '--frozen-lockfile']
+
 - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
   entrypoint: 'bash'
   args:
@@ -12,22 +14,17 @@ steps:
   env:
   - 'CI=true'
 
-artifacts:
-  objects:
-    location: 'gs://vierageorge-pw-poc/$BUILD_ID'
-    paths: ['playwright-report']
+- name: "gcr.io/cloud-builders/gcloud-slim"
+  args: [
+    "storage",
+    "cp",
+    "--recursive",
+    "playwright-report",
+    "gs://vierageorge-pw-poc/$BUILD_ID/",
+  ]
 
-# - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
-#   args: ['yarn', 'test']
-#   env:
-#   - 'CI=true'
-#   - 'DEBUG=pw:browser'
-
-# - name: 'gcr.io/cloud-builders/gsutil'  # (Optional)
-#   args: ['-m', 'cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/$BUILD_ID/']
-
-# # Parse the output to extract the public URL
-# - name: 'bash'
-#   args:
-#   - '-c'  # Execute a shell command
-#   - echo "https://storage.googleapis.com/vierageorge-pw-poc/$BUILD_ID/playwright-report/index.html"
+# Parse the output to extract the public URL
+- name: 'bash'
+  args:
+  - '-c'  # Execute a shell command
+  - echo "https://storage.googleapis.com/vierageorge-pw-poc/$BUILD_ID/playwright-report/index.html"

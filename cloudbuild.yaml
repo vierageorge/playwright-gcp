@@ -3,8 +3,10 @@ steps:
 - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
   args: ['yarn', '--frozen-lockfile']
 
-# - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
-#   args: ['yarn', 'playwright', 'install', 'chrome']
+- name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
+  args: ['yarn', 'playwright', 'install', 'chrome']
+  env:
+  - 'CI=true'
 
 # - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
 #   script: |

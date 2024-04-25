@@ -4,18 +4,20 @@ steps:
   args: ['yarn', '--frozen-lockfile']
 
 - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
-  args: ['yarn', 'playwright', 'install', '--with-deps', 'chrome']
-
-# - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
-#   script: |
-#       #!/usr/bin/env bash
-#       command -V google-chrome
-
-- name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
-  args: ['yarn', 'test']
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      yarn playwright install chrome \
+      && yarn test
   env:
   - 'CI=true'
-  - 'DEBUG=pw:browser'
+
+# - name: 'mcr.microsoft.com/playwright:v1.43.1-jammy'
+#   args: ['yarn', 'test']
+#   env:
+#   - 'CI=true'
+#   - 'DEBUG=pw:browser'
 
 # - name: 'gcr.io/cloud-builders/gsutil'  # (Optional)
 #   args: ['-m', 'cp', '-r', 'playwright-report', 'gs://vierageorge-pw-poc/$BUILD_ID/']

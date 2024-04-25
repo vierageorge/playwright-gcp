@@ -13,6 +13,7 @@ const TODO_ITEMS = [
 test.describe('New Todo', () => {
   test('should allow me to add todo items', async ({ page }) => {
     // create a new todo locator
+    console.log('## CI ## ', process.env.CI ?? 'not_present');
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
     // Create 1st todo.
